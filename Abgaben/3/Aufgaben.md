@@ -25,5 +25,7 @@ werden.
 
 ## Aufgabe 3 - Banken Simulation
 
-
+In diesem Programm haben wir eine Struktur von Banken. Eine Bank kann verschiedene
+Arten von Account haben, welche über eine Abstraktion gesammelt werden. Ein
+Account speichert die verschiedenen Bookings.
 
