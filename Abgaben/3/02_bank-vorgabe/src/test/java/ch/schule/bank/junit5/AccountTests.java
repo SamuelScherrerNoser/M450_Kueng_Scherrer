@@ -7,6 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,12 +20,15 @@ import static org.junit.jupiter.api.Assertions.*;
  * @version 1.0
  */
 public class AccountTests {
-    Account cut;
+
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+    private Account cut;
 
     @BeforeEach
     public void Setup() {
-
         cut = new SavingsAccount("1");
+        System.setOut(new PrintStream(outputStreamCaptor));
     }
 
     @AfterEach
@@ -170,5 +175,49 @@ public class AccountTests {
 
         // Assert
         assertFalse(actual);
+    }
+
+    @Test
+    public void testPrint()
+    {
+        // Arrange
+        cut.deposit(10, 100);
+        String expectedResult = """
+Kontoauszug '1'
+Datum          Betrag      Saldo
+11.01.1970       0.00       0.00""";
+
+        // Act
+        cut.print();
+        String actualResult = outputStreamCaptor.toString().trim();
+        
+        // Assert
+        assertEquals(expectedResult, actualResult);
+
+    }
+    
+    @Test
+    public void testPrint_withArguments()
+    {
+        // Arrange
+        cut.deposit(1, 100);
+        cut.deposit(33, 100);
+        cut.deposit(100, 100);
+
+        int year = 1970;
+        int month = 2;
+
+        String expectedResult = """
+Kontoauszug '1' Monat: 2.1970
+Datum          Betrag      Saldo
+04.02.1970       0.00       0.00""";
+
+        // Act
+        cut.print(year, month);
+        String actualResult = outputStreamCaptor.toString().trim();
+        
+        // Assert
+        assertEquals(expectedResult, actualResult);
+
     }
 }

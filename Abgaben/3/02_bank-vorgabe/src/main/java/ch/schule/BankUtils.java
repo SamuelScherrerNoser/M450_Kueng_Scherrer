@@ -2,7 +2,7 @@ package ch.schule;
 
 import java.text.*;
 
-public class BankUtils
+public abstract class BankUtils
 {
 	/**
 	 * Formatiere f�r zweistellige Zahlen.
@@ -46,7 +46,7 @@ public class BankUtils
 	 */
 	public static String formatAmount(long amount)
 	{
-		String s = AMOUNT_FORMAT.format(amount / 100000.0);
+		String s = AMOUNT_FORMAT.format(amount / 100_000.0);
 
 		while (s.length() < 10)
 			s = " " + s;

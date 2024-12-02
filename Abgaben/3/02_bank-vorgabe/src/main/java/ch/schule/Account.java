@@ -164,28 +164,4 @@ public abstract class Account
 		    balance += b.getAmount();
 		}
 	}
-
-	/**
-	 * @uml.property  name="booking"
-	 * @uml.associationEnd  aggregation="shared" inverse="account:ch.schule.m326.bank.Booking"
-	 */
-	private Booking booking;
-
-	/**
-	 * Getter of the property <tt>booking</tt>
-	 * @return  Returns the booking.
-	 * @uml.property  name="booking"
-	 */
-	public Booking getBooking() {
-		return booking;
-	}
-
-	/**
-	 * Setter of the property <tt>booking</tt>
-	 * @param booking  The booking to set.
-	 * @uml.property  name="booking"
-	 */
-	public void setBooking(Booking booking) {
-		this.booking = booking;
-	}
 }
