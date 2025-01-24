@@ -15,8 +15,8 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private final String name;
-    private final String email;
+    private String name;
+    private String email;
 
     public Student(String name, String email) {
         this.name = name;
