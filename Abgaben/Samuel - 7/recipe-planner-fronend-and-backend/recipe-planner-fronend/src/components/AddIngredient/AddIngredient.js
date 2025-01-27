@@ -5,17 +5,21 @@ import {Button, Col, Form, Row} from "react-bootstrap";
 
 const AddIngredient = ({ingredients, ingredient, updateIngredient, removeIngredient}) => {
 
+    const onInputChange = (e) => {
+        const { name, value } = e.target;
+        updateIngredient({ ...ingredient, [name]: value });
+    };
+
     return (
         <Row>
             <Col>
                 <Form.Group className="mb-1" controlId="formBasicName">
-                    <Form.Control placeholder="Name"/>
+                    <Form.Control placeholder="Name" name="name" value={ingredient.name} onChange={onInputChange}/>
                 </Form.Group>
             </Col>
             <Col>
                 <Form.Group className="mb-1" controlId="formBasicUnit">
-                    <Form.Select>
-                        <option>PIECE</option>
+                    <Form.Select name="unit" value={ingredient.unit} onChange={onInputChange}>                        <option>PIECE</option>
                         <option>GRAMM</option>
                         <option>KILOGRAMM</option>
                         <option>LITRE</option>
@@ -25,7 +29,7 @@ const AddIngredient = ({ingredients, ingredient, updateIngredient, removeIngredi
             </Col>
             <Col>
                 <Form.Group className="mb-1" controlId="quantity">
-                    <Form.Control placeholder="Quantity"/>
+                    <Form.Control placeholder="Quantity" name="amount" value={ingredient.amount} onChange={onInputChange} />
                 </Form.Group>
             </Col>
             <Col xs={1}>
