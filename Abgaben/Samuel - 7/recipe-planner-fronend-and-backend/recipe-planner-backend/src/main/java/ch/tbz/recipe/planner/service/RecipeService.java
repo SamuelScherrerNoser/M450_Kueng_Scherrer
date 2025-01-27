@@ -34,4 +34,14 @@ public class RecipeService {
         var createdRecipe = repository.save(mapper.domainToEntity(recipe));
         return mapper.entityToDomain(createdRecipe);
     }
+
+    public Recipe updateRecipe(UUID recipeId, Recipe recipe) {
+        RecipeEntity existingRecipeEntity = repository.findById(recipeId).orElseThrow(() -> new RuntimeException("Recipe not found"));
+        existingRecipeEntity.setName(recipe.getName());
+        existingRecipeEntity.setDescription(recipe.getDescription());
+        existingRecipeEntity.setImageUrl(recipe.getImageUrl());
+        repository.save(existingRecipeEntity);
+        return mapper.entityToDomain(existingRecipeEntity);
+    }
+
 }
