@@ -1,0 +1,31 @@
+<div class="card my-5" *ngIf="!loading">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #studentForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          [(ngModel)]="student.name"
+          class="form-control"
+          id="name"
+          name="name"
+          placeholder="Enter student name"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          [(ngModel)]="student.email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Enter student email"
+          required
+        />
+      </div>
+      <button type="submit" [disabled]="!studentForm.form.valid" class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>

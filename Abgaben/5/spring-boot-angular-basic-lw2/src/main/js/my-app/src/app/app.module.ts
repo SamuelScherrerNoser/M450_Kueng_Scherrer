@@ -6,14 +6,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 import { StudentService } from './service/student.service';
-import {StudentListComponent} from "./student-list/student-list.component";
-import {StudentFormComponent} from "./student-form/student-form.component";
+import { StudentListComponent } from './student-list/student-list.component';
+import { StudentFormComponent } from './student-form/student-form.component';
+import { EditStudentComponent } from './edit-student/edit-student.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentListComponent,
-    StudentFormComponent
+    StudentFormComponent,
+    EditStudentComponent
   ],
   imports: [
     BrowserModule,

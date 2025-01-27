@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Student } from '../model/student';
-import {Observable} from "rxjs";
+import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class StudentService {
 
   private studentUrl: string;
@@ -18,5 +20,13 @@ export class StudentService {
 
   public save(student: Student) {
     return this.http.post<Student>(this.studentUrl, student);
+  }
+
+  public getStudentById(id: number): Observable<Student> {
+    return this.http.get<Student>(`${this.studentUrl}/${id}`);
+  }
+
+  public updateStudent(student: Student): Observable<Student> {
+    return this.http.put<Student>(`${this.studentUrl}/${student.id}`, student);
   }
 }
