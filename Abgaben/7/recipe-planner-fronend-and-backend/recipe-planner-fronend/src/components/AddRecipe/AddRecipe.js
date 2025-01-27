@@ -36,8 +36,8 @@ function AddRecipe() {
                 }
             ]}))
         setListId(listId + 1)
-
     }
+
     const updateIngredient = (ingredientObj) => {
         const updatedIngredients = formData.ingredients.map((ingredient) => {
             if (ingredient.listId === ingredientObj.listId) {
@@ -62,20 +62,68 @@ function AddRecipe() {
         removeIngredient={removeIngredient}
     />)
 
+    const addRecipe = async () => {
+        try {
+            const response = await axios.post("http://localhost:8080/api/recipes", formData, {
+                headers: { "Content-Type": "application/json" },
+            });
+
+            console.log("Recipe added successfully:", response.data);
+            alert("Recipe added successfully!");
+
+            setFormData({
+                name: "",
+                description: "",
+                imageUrl: "",
+                ingredients: [],
+                id: null,
+            });
+
+            setListId(1);
+
+        } catch (error) {
+            console.error("Error adding recipe:", error);
+            alert("Failed to add recipe. Please try again.");
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
     return (
         <>
             <div className="bg">
                 <div className="m-3">
                     <h1 className="h3 bg-dark text-bg-primary mt-2">Add Recipe</h1>
+
                     <Form.Group className="mb-1" controlId="formBasicName">
                         <Form.Label>Recipe Name:</Form.Label>
-                        <Form.Control placeholder="Name"/>
-                    </Form.Group><Form.Group className="mb-1" controlId="formBasicDescription">
+                        <Form.Control
+                          placeholder="Name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-1" controlId="formBasicDescription">
                         <Form.Label>Description:</Form.Label>
-                        <Form.Control placeholder="Description"/>
-                    </Form.Group><Form.Group className="mb-1 mb-5" controlId="formBasicImageUrl">
+                        <Form.Control
+                          placeholder="Description"
+                          name="description"
+                          value={formData.description}
+                          onChange={handleInputChange}
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-1 mb-5" controlId="formBasicImageUrl">
                         <Form.Label>Image URL:</Form.Label>
-                        <Form.Control placeholder="URL"/>
+                        <Form.Control
+                          placeholder="URL"
+                          name="imageUrl"
+                          value={formData.imageUrl}
+                          onChange={handleInputChange}
+                        />
                     </Form.Group>
                     <Row>
                         <Col>Ingredient</Col>
@@ -87,6 +135,7 @@ function AddRecipe() {
                     <Row>
                         <br></br>
                     </Row>
+
                     {renderIngredients}
                     <Row>
                         <br></br>
@@ -96,7 +145,7 @@ function AddRecipe() {
                             className="mt-1"
                             >Add Ingredient</Button>
                     </Row>
-                    <Button variant="primary"  type="submit" className="mb-5">
+                    <Button variant="primary"  type="submit" className="mb-5" onClick={addRecipe}>
                         Submit
                     </Button>
                 </div>
