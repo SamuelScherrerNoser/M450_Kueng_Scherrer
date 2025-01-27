@@ -36,8 +36,8 @@ function AddRecipe() {
                 }
             ]}))
         setListId(listId + 1)
-
     }
+
     const updateIngredient = (ingredientObj) => {
         const updatedIngredients = formData.ingredients.map((ingredient) => {
             if (ingredient.listId === ingredientObj.listId) {
@@ -70,7 +70,7 @@ function AddRecipe() {
 
             console.log("Recipe added successfully:", response.data);
             alert("Recipe added successfully!");
-            // Optionally, reset form data after successful submission
+
             setFormData({
                 name: "",
                 description: "",
